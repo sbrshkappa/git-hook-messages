@@ -91,14 +91,10 @@ jobs:
     - name: Run tests
       run: npm test
     
-    - name: Login to npm
+    - name: Setup npm authentication
       run: |
-        echo "${{ secrets.NPM_PASSWORD }}" | npm login --username "${{ secrets.NPM_USERNAME }}" --password "${{ secrets.NPM_PASSWORD }}" --email "${{ secrets.NPM_EMAIL }}" --registry https://registry.npmjs.org/
-    
-    - name: Clean npm configuration
-      run: |
-        rm -f ~/.npmrc
-        npm config set registry https://registry.npmjs.org/
+        echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+        echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
     
     - name: Publish to npm
       run: npm publish --access public
