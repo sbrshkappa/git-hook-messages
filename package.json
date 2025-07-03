@@ -13,7 +13,6 @@
     "test": "jest",
     "lint": "eslint src --ext .ts",
     "format": "prettier --write src/**/*.ts",
-    "prepare": "npm run build",
     "install-hooks": "node dist/cli.js install",
     "uninstall-hooks": "node dist/cli.js uninstall",
     "prepublishOnly": "npm run build && npm test"
