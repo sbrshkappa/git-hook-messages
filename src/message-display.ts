@@ -1,4 +1,4 @@
-const chalk = require('chalk');
+import kleur from 'kleur';
 import * as readline from 'readline';
 import { HookContext } from './types';
 
@@ -12,11 +12,11 @@ export class MessageDisplay {
 
     // Different styling for post-commit to make it visually distinct
     if (hookName === 'postCommit') {
-      console.log('\n' + chalk.green.bold('🎉 Post-Commit Reminders'));
-      console.log(chalk.green('─'.repeat(50)));
+      console.log('\n' + kleur.bold(kleur.green('🎉 Post-Commit Reminders')));
+      console.log(kleur.green('─'.repeat(50)));
     } else {
-      console.log('\n' + chalk.blue.bold('🧩 Git Hook Messages'));
-      console.log(chalk.gray('─'.repeat(50)));
+      console.log('\n' + kleur.bold(kleur.blue('🧩 Git Hook Messages')));
+      console.log(kleur.gray('─'.repeat(50)));
     }
 
     for (const message of messages) {
@@ -25,9 +25,9 @@ export class MessageDisplay {
     }
 
     if (hookName === 'postCommit') {
-      console.log(chalk.green('─'.repeat(50)) + '\n');
+      console.log(kleur.green('─'.repeat(50)) + '\n');
     } else {
-      console.log(chalk.gray('─'.repeat(50)) + '\n');
+      console.log(kleur.gray('─'.repeat(50)) + '\n');
     }
   }
 
@@ -36,10 +36,10 @@ export class MessageDisplay {
 
     // Replace placeholders with context values
     if (context) {
-      formatted = formatted.replace(/{branch}/g, chalk.cyan(context.branch));
+      formatted = formatted.replace(/{branch}/g, kleur.cyan(context.branch));
       formatted = formatted.replace(/{isMainBranch}/g, context.isMainBranch ? 'true' : 'false');
       formatted = formatted.replace(/{hasStagedChanges}/g, context.hasStagedChanges ? 'true' : 'false');
-      formatted = formatted.replace(/{lastCommitMessage}/g, chalk.gray(context.lastCommitMessage));
+      formatted = formatted.replace(/{lastCommitMessage}/g, kleur.gray(context.lastCommitMessage));
     }
 
     // Add emoji if not present
@@ -59,7 +59,7 @@ export class MessageDisplay {
     }
 
     return new Promise((resolve) => {
-      this.rl!.question(`${chalk.yellow('❓')} ${message} (y/N): `, (answer) => {
+      this.rl!.question(`${kleur.yellow('❓')} ${message} (y/N): `, (answer) => {
         const confirmed = answer.toLowerCase().startsWith('y');
         resolve(confirmed);
       });
@@ -84,7 +84,7 @@ export class MessageDisplay {
       );
       
       if (!confirmed) {
-        console.log(chalk.red('❌ Git operation cancelled by user.'));
+        console.log(kleur.red('❌ Git operation cancelled by user.'));
         return false;
       }
     }
