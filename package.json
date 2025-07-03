@@ -1,6 +1,6 @@
 {
   "name": "git-hook-messages",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A lightweight utility to add friendly or informative messages during git operations",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
