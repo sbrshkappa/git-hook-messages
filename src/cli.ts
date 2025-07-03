@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import kleur from 'kleur';
-import { Command } from 'commander';
+const { Command } = require('commander');
 import * as fs from 'fs';
 import * as path from 'path';
 import { HookHandler } from './hook-handler';
@@ -18,7 +18,7 @@ program
   .command('install')
   .description('Install git hooks with message support')
   .option('-f, --force', 'Force installation even if hooks already exist')
-  .action(async (options) => {
+  .action(async (options: any) => {
     try {
       if (!GitContext.isGitRepository()) {
         console.error(kleur.red('❌ Not in a git repository'));
@@ -90,7 +90,7 @@ program
 program
   .command('test <hook>')
   .description('Test a specific hook without running the actual git operation')
-  .action(async (hook) => {
+  .action(async (hook: string) => {
     try {
       const success = await HookHandler.handleHook(hook, false);
       process.exit(success ? 0 : 1);
