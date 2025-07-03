@@ -1,7 +1,7 @@
-import { ConfigLoader } from './config.js';
-import { MessageDisplay } from './message-display.js';
-import { GitContext } from './git-context.js';
-import { HookContext } from './types.js';
+import { ConfigLoader } from './config';
+import { MessageDisplay } from './message-display';
+import { GitContext } from './git-context';
+import { HookContext } from './types';
 
 export class HookHandler {
   static async handleHook(hookName: string, requireConfirmation: boolean = false): Promise<boolean> {
@@ -57,6 +57,10 @@ export class HookHandler {
   }
 
   static getHookScript(hookName: string): string {
-    return `#!/usr/bin/env node\nimport('./hook-runner.js').then(m => m.default('${hookName}'));\n`;
+    return `#!/bin/sh
+# Git Hook Messages - ${hookName}
+node "${__dirname}/hook-runner.js" ${hookName}
+exit $?
+`;
   }
 } 

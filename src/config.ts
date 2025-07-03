@@ -1,7 +1,7 @@
-import fs from 'fs';
-import path from 'path';
-import yaml from 'js-yaml';
-import { ConfigFile, GitHookConfig } from './types.js';
+import * as fs from 'fs';
+import * as path from 'path';
+import * as yaml from 'js-yaml';
+import { ConfigFile, GitHookConfig } from './types';
 
 export class ConfigLoader {
   private static readonly CONFIG_FILES = [

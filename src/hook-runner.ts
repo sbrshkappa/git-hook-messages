@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-import { HookHandler } from './hook-handler.js';
+import { HookHandler } from './hook-handler';
 
-export default async function main(hookNameArg: string | undefined) {
-  const hookName = hookNameArg || process.argv[2];
+async function main() {
+  const hookName = process.argv[2];
   
   if (!hookName) {
     console.error('❌ Hook name not provided');
@@ -40,6 +40,4 @@ export default async function main(hookNameArg: string | undefined) {
   }
 }
 
-if (process.argv[1] && process.argv[1].endsWith('hook-runner.js')) {
-  main(process.argv[2]);
-} 
+main(); 

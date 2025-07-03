@@ -41,7 +41,7 @@
   },
   "homepage": "https://github.com/sbrshkappa/git-hook-messages#readme",
   "dependencies": {
-    "chalk": "^5.4.1",
+    "chalk": "^4.1.2",
     "commander": "^11.1.0",
     "js-yaml": "^4.1.0",
     "simple-git-hooks": "^2.9.0"
@@ -64,6 +64,5 @@
     "dist",
     "README.md",
     "LICENSE"
-  ],
-  "type": "module"
+  ]
 }

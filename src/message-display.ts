@@ -1,6 +1,6 @@
-import chalk from 'chalk';
-import readline from 'readline';
-import { HookContext } from './types.js';
+const chalk = require('chalk');
+import * as readline from 'readline';
+import { HookContext } from './types';
 
 export class MessageDisplay {
   private static rl: readline.Interface | null = null;
