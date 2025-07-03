@@ -34,12 +34,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/git-hook-messages.git"
+    "url": "git+https://github.com/sbrshkappa/git-hook-messages.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/git-hook-messages/issues"
+    "url": "https://github.com/sbrshkappa/git-hook-messages/issues"
   },
-  "homepage": "https://github.com/yourusername/git-hook-messages#readme",
+  "homepage": "https://github.com/sbrshkappa/git-hook-messages#readme",
   "dependencies": {
     "chalk": "^4.1.2",
     "commander": "^11.1.0",
