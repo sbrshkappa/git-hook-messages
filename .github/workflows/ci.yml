@@ -95,6 +95,11 @@ jobs:
       run: |
         echo "${{ secrets.NPM_PASSWORD }}" | npm login --username "${{ secrets.NPM_USERNAME }}" --password "${{ secrets.NPM_PASSWORD }}" --email "${{ secrets.NPM_EMAIL }}" --registry https://registry.npmjs.org/
     
+    - name: Clean npm configuration
+      run: |
+        rm -f ~/.npmrc
+        npm config set registry https://registry.npmjs.org/
+    
     - name: Publish to npm
       run: npm publish --access public
     - name: Create GitHub Release
