@@ -5,20 +5,30 @@ import { HookContext } from './types';
 export class MessageDisplay {
   private static rl: readline.Interface | null = null;
 
-  static displayMessages(messages: string[], context?: HookContext): void {
+  static displayMessages(messages: string[], context?: HookContext, hookName?: string): void {
     if (messages.length === 0) {
       return;
     }
 
-    console.log('\n' + chalk.blue.bold('🧩 Git Hook Messages'));
-    console.log(chalk.gray('─'.repeat(50)));
+    // Different styling for post-commit to make it visually distinct
+    if (hookName === 'postCommit') {
+      console.log('\n' + chalk.green.bold('🎉 Post-Commit Reminders'));
+      console.log(chalk.green('─'.repeat(50)));
+    } else {
+      console.log('\n' + chalk.blue.bold('🧩 Git Hook Messages'));
+      console.log(chalk.gray('─'.repeat(50)));
+    }
 
     for (const message of messages) {
       const formattedMessage = this.formatMessage(message, context);
       console.log(formattedMessage);
     }
 
-    console.log(chalk.gray('─'.repeat(50)) + '\n');
+    if (hookName === 'postCommit') {
+      console.log(chalk.green('─'.repeat(50)) + '\n');
+    } else {
+      console.log(chalk.gray('─'.repeat(50)) + '\n');
+    }
   }
 
   private static formatMessage(message: string, context?: HookContext): string {
@@ -59,13 +69,14 @@ export class MessageDisplay {
   static async displayInteractiveMessages(
     messages: string[], 
     context?: HookContext,
-    requireConfirmation: boolean = false
+    requireConfirmation: boolean = false,
+    hookName?: string
   ): Promise<boolean> {
     if (messages.length === 0) {
       return true;
     }
 
-    this.displayMessages(messages, context);
+    this.displayMessages(messages, context, hookName);
 
     if (requireConfirmation) {
       const confirmed = await this.promptConfirmation(

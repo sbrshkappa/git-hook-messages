@@ -26,7 +26,8 @@ export class HookHandler {
     const shouldContinue = await MessageDisplay.displayInteractiveMessages(
       messages,
       context,
-      requireConfirmation
+      requireConfirmation,
+      hookName
     );
 
     // Clean up
