@@ -1,5 +1,5 @@
 {
-  "name": "@sbrsh/git-hook-messages",
+  "name": "git-hook-messages-cli",
   "version": "1.0.0",
   "description": "A lightweight utility to add friendly or informative messages during git operations",
   "main": "dist/index.js",

@@ -16,7 +16,7 @@ A lightweight utility to add friendly or informative messages during git operati
 ### Installation
 
 ```bash
-npm install @sbrsh/git-hook-messages
+npm install git-hook-messages-cli
 ```
 
 ### Setup
