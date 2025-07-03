@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import chalk from 'chalk';
+import * as chalk from 'chalk';
 import * as fs from 'fs';
 import * as path from 'path';
 import { HookHandler } from './hook-handler';

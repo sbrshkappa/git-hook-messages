@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+import * as chalk from 'chalk';
 import * as readline from 'readline';
 import { HookContext } from './types';
 
