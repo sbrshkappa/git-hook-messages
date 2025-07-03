@@ -15,7 +15,8 @@
     "format": "prettier --write src/**/*.ts",
     "prepare": "npm run build",
     "install-hooks": "node dist/cli.js install",
-    "uninstall-hooks": "node dist/cli.js uninstall"
+    "uninstall-hooks": "node dist/cli.js uninstall",
+    "prepublishOnly": "npm run build && npm test"
   },
   "keywords": [
     "git",
@@ -24,10 +25,21 @@
     "pre-push",
     "developer-tools",
     "workflow",
-    "team-norms"
+    "team-norms",
+    "git-hooks",
+    "commit-hooks",
+    "development-workflow"
   ],
   "author": "Your Name",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/git-hook-messages.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/git-hook-messages/issues"
+  },
+  "homepage": "https://github.com/yourusername/git-hook-messages#readme",
   "dependencies": {
     "chalk": "^4.1.2",
     "commander": "^11.1.0",
