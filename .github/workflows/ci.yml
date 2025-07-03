@@ -93,11 +93,29 @@ jobs:
     
     - name: Setup npm authentication
       run: |
+        # Clean any existing npm configuration
+        rm -f ~/.npmrc
+        rm -f $HOME/.npmrc
+        
+        # Set HOME environment variable explicitly
+        export HOME=/home/runner
+        
+        # Create fresh .npmrc with token
         echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
         echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
+        
+        # Verify npm configuration
+        npm config list
+        
+        # Alternative: Try npm login with token
+        npm whoami || echo "Token authentication failed, trying alternative method"
     
     - name: Publish to npm
-      run: npm publish --access public
+      run: |
+        export HOME=/home/runner
+        npm publish --access public
+      env:
+        HOME: /home/runner
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v1
       with:
