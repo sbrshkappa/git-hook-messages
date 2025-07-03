@@ -85,7 +85,7 @@ export class ConfigLoader {
       return [];
     }
 
-    let messages: string[] = [];
+    const messages: string[] = [];
 
     // Check for branch-specific rules first
     if (config.branchRules && context?.branch) {

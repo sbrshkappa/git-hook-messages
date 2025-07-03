@@ -1,7 +1,6 @@
 import { ConfigLoader } from './config';
 import { MessageDisplay } from './message-display';
 import { GitContext } from './git-context';
-import { HookContext } from './types';
 
 export class HookHandler {
   static async handleHook(hookName: string, requireConfirmation: boolean = false): Promise<boolean> {

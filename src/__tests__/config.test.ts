@@ -1,5 +1,4 @@
 import * as fs from 'fs';
-import * as path from 'path';
 import { ConfigLoader } from '../config';
 
 // Mock fs module
