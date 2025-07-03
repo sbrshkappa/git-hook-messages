@@ -91,24 +91,12 @@ jobs:
     - name: Run tests
       run: npm test
     
-    - name: Verify npm authentication
+    - name: Login to npm
       run: |
-        echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-        npm whoami
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-    
-    # Alternative approach if token doesn't work:
-    # - name: Login to npm
-    #   run: |
-    #     echo "${{ secrets.NPM_USERNAME }}" | npm login --username "${{ secrets.NPM_USERNAME }}" --password "${{ secrets.NPM_PASSWORD }}" --email "${{ secrets.NPM_EMAIL }}"
+        echo "${{ secrets.NPM_PASSWORD }}" | npm login --username "${{ secrets.NPM_USERNAME }}" --password "${{ secrets.NPM_PASSWORD }}" --email "${{ secrets.NPM_EMAIL }}" --registry https://registry.npmjs.org/
     
     - name: Publish to npm
-      run: |
-        echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-        npm publish --access public
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      run: npm publish --access public
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v1
       with:
