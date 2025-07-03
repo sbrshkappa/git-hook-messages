@@ -1,0 +1,61 @@
+{
+  "hooks": {
+    "preCommit": [
+      "✅ Did you run tests?",
+      "🔧 Did you lint your code?",
+      "📝 Did you update the changelog?",
+      "💡 Is your commit message descriptive?"
+    ],
+    "prePush": [
+      "🚨 You're pushing to {branch}. Make sure it's intentional.",
+      "✅ Did your PR pass CI?",
+      "🔗 Link PR to Jira ticket: JIRA-123",
+      "📋 Did you update documentation?"
+    ],
+    "postCommit": [
+      "🎉 Commit successful! Don't forget to push your changes.",
+      "💡 Consider creating a PR if this is a feature branch."
+    ],
+    "postMerge": [
+      "🔄 Merge completed! Consider running tests to ensure everything works.",
+      "🧹 Clean up any temporary files or branches."
+    ],
+    "preRebase": [
+      "⚠️  About to rebase. Make sure you have a backup of your work.",
+      "📝 Consider squashing commits for a cleaner history."
+    ]
+  },
+  "options": {
+    "interactive": true,
+    "branchSpecific": true,
+    "confirmBeforeBlock": true
+  },
+  "branchRules": {
+    "main": {
+      "prePush": [
+        "🚨 WARNING: You're pushing directly to main branch!",
+        "Are you absolutely sure this is intentional?",
+        "Consider creating a PR instead for code review."
+      ]
+    },
+    "master": {
+      "prePush": [
+        "🚨 WARNING: You're pushing directly to master branch!",
+        "Are you absolutely sure this is intentional?",
+        "Consider creating a PR instead for code review."
+      ]
+    },
+    "feature/*": {
+      "preCommit": [
+        "💡 Remember to keep commits focused and atomic",
+        "🔍 Consider if this change needs tests"
+      ]
+    },
+    "hotfix/*": {
+      "preCommit": [
+        "🚨 Hotfix branch - ensure this is urgent and necessary",
+        "✅ Test thoroughly before committing"
+      ]
+    }
+  }
+} 
