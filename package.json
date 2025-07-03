@@ -4,9 +4,6 @@
   "description": "A lightweight utility to add friendly or informative messages during git operations",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "bin": {
-    "git-hook-messages": "dist/cli.js"
-  },
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
@@ -63,5 +60,8 @@
     "dist",
     "README.md",
     "LICENSE"
-  ]
+  ],
+  "bin": {
+    "git-hook-messages": "dist/cli.js"
+  }
 }
