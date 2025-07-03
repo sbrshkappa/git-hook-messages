@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
+import chalk from 'chalk';
 import { Command } from 'commander';
-import * as chalk from 'chalk';
-import * as fs from 'fs';
-import * as path from 'path';
-import { HookHandler } from './hook-handler';
-import { ConfigLoader } from './config';
-import { GitContext } from './git-context';
+import fs from 'fs';
+import path from 'path';
+import { HookHandler } from './hook-handler.js';
+import { ConfigLoader } from './config.js';
+import { GitContext } from './git-context.js';
 
 const program = new Command();
 

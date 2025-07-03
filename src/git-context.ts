@@ -1,5 +1,5 @@
 import { execSync } from 'child_process';
-import { HookContext } from './types';
+import { HookContext } from './types.js';
 
 export class GitContext {
   static getCurrentContext(): HookContext {
