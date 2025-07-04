@@ -1,5 +1,5 @@
 {
-  "name": "git-hook-messages-cli",
+  "name": "dev-workflow-notifier",
   "version": "1.0.0",
   "description": "A lightweight utility to add friendly or informative messages during git operations",
   "main": "dist/index.js",
@@ -63,5 +63,8 @@
   ],
   "bin": {
     "git-hook-messages": "dist/cli.js"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

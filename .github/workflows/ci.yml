@@ -103,16 +103,52 @@ jobs:
         # Create fresh .npmrc with token
         echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
         echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
+        echo "always-auth=true" >> ~/.npmrc
         
         # Verify npm configuration
+        echo "=== npm config list ==="
         npm config list
         
-        # Alternative: Try npm login with token
-        npm whoami || echo "Token authentication failed, trying alternative method"
+        # Check if we can authenticate
+        echo "=== npm whoami ==="
+        npm whoami
+        
+        # Check if package already exists
+        echo "=== checking if package exists ==="
+        npm view dev-workflow-notifier || echo "Package does not exist yet - this is expected for first publish"
+        
+        # Verify token permissions
+        echo "=== checking token permissions ==="
+        npm token list || echo "Token list failed - this might be expected"
+        
+        # Check registry configuration
+        echo "=== checking registry ==="
+        npm config get registry
+        npm config get scope
+        
+        # Test registry access
+        echo "=== testing registry access ==="
+        curl -s "https://registry.npmjs.org/dev-workflow-notifier" | head -20 || echo "Package not found in registry (expected for first publish)"
     
     - name: Publish to npm
       run: |
         export HOME=/home/runner
+        
+        # Ensure we're publishing as a new package
+        echo "Publishing package: dev-workflow-notifier@1.0.0"
+        echo "Package.json contents:"
+        cat package.json
+        
+        # Verify authentication again before publish
+        echo "=== verifying authentication before publish ==="
+        npm whoami
+        
+        # Try to publish with explicit new package flag
+        echo "=== dry run ==="
+        npm publish --access public --dry-run || echo "Dry run completed"
+        
+        # Actual publish
+        echo "=== actual publish ==="
         npm publish --access public
       env:
         HOME: /home/runner
