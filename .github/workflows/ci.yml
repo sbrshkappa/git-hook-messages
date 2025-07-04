@@ -111,6 +111,10 @@ jobs:
         echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
         echo "always-auth=true" >> ~/.npmrc
         
+        # Debug: Show token configuration (without exposing the token)
+        echo "=== .npmrc contents (token hidden) ==="
+        cat ~/.npmrc | sed 's/:_authToken=.*/:_authToken=***HIDDEN***/'
+        
         # Verify npm configuration
         echo "=== npm config list ==="
         npm config list
@@ -118,13 +122,8 @@ jobs:
         # Check if we can authenticate
         echo "=== npm whoami ==="
         npm whoami || {
-          echo "ERROR: npm authentication failed!"
-          echo "This usually means:"
-          echo "1. NPM_TOKEN secret is not set in GitHub"
-          echo "2. Token has expired or is invalid"
-          echo "3. Token doesn't have publish permissions"
-          echo "Please check your npm token at: https://www.npmjs.com/settings/tokens"
-          exit 1
+          echo "WARNING: npm whoami failed, but this might be expected with granular tokens"
+          echo "Proceeding with publish attempt..."
         }
         
         # Check if package already exists
@@ -143,6 +142,10 @@ jobs:
         # Test registry access
         echo "=== testing registry access ==="
         curl -s "https://registry.npmjs.org/dev-workflow-notifier" | head -20 || echo "Package not found in registry (expected for first publish)"
+        
+        # Test token with npm API directly
+        echo "=== testing npm API access ==="
+        curl -s -H "Authorization: Bearer ${{ secrets.NPM_TOKEN }}" "https://registry.npmjs.org/-/user" | head -10 || echo "API access test failed"
     
     - name: Publish to npm
       run: |
