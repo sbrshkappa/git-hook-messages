@@ -160,7 +160,7 @@ jobs:
         export HOME=/home/runner
         
         # Ensure we're publishing as a new package
-        echo "Publishing package: dev-workflow-notifier@1.0.0-beta.3"
+        echo "Publishing package: dev-workflow-notifier@1.0.0-beta.4"
         echo "Package.json contents:"
         cat package.json
         
