@@ -93,9 +93,16 @@ jobs:
     
     - name: Setup npm authentication
       run: |
-        # Clean any existing npm configuration
+        # Clean any existing npm configuration more aggressively
         rm -f ~/.npmrc
         rm -f $HOME/.npmrc
+        rm -f .npmrc
+        rm -f ./npmrc
+        
+        # Also clean npm cache and config
+        npm cache clean --force
+        npm config delete registry
+        npm config delete scope
         
         # Set HOME environment variable explicitly
         export HOME=/home/runner
