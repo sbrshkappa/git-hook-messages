@@ -122,7 +122,8 @@ jobs:
         # Check if we can authenticate
         echo "=== npm whoami ==="
         npm whoami || {
-          echo "WARNING: npm whoami failed, but this might be expected with granular tokens"
+          echo "WARNING: npm whoami failed - this is expected with granular tokens"
+          echo "Granular tokens may not support whoami but can still publish"
           echo "Proceeding with publish attempt..."
         }
         
@@ -152,13 +153,12 @@ jobs:
         export HOME=/home/runner
         
         # Ensure we're publishing as a new package
-        echo "Publishing package: dev-workflow-notifier@1.0.0"
+        echo "Publishing package: dev-workflow-notifier@1.0.0-beta.3"
         echo "Package.json contents:"
         cat package.json
         
-        # Verify authentication again before publish
-        echo "=== verifying authentication before publish ==="
-        npm whoami
+        # Skip whoami check for granular tokens
+        echo "=== skipping whoami check for granular token ==="
         
         # Try to publish with explicit new package flag
         echo "=== dry run ==="
