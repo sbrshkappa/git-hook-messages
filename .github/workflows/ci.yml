@@ -100,6 +100,12 @@ jobs:
         # Set HOME environment variable explicitly
         export HOME=/home/runner
         
+        # Check if NPM_TOKEN is set
+        if [ -z "${{ secrets.NPM_TOKEN }}" ]; then
+          echo "ERROR: NPM_TOKEN secret is not set!"
+          exit 1
+        fi
+        
         # Create fresh .npmrc with token
         echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
         echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
@@ -111,7 +117,15 @@ jobs:
         
         # Check if we can authenticate
         echo "=== npm whoami ==="
-        npm whoami
+        npm whoami || {
+          echo "ERROR: npm authentication failed!"
+          echo "This usually means:"
+          echo "1. NPM_TOKEN secret is not set in GitHub"
+          echo "2. Token has expired or is invalid"
+          echo "3. Token doesn't have publish permissions"
+          echo "Please check your npm token at: https://www.npmjs.com/settings/tokens"
+          exit 1
+        }
         
         # Check if package already exists
         echo "=== checking if package exists ==="
